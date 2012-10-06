@@ -9,11 +9,12 @@
 %undefine	with_dist_kernel
 %endif
 
+%define		rel	3
+%define		pname	linux-one
 Summary:	One IPC Linux kernel module
 Summary(pl.UTF-8):	Moduł IPC One dla jądra Linuksa
-Name:		linux-one
+Name:		%{pname}%{_alt_kernel}
 Version:	1.6.0
-%define		rel	2
 Release:	%{rel}
 License:	GPL v2+
 Group:		Base/Kernel
@@ -22,7 +23,7 @@ Group:		Base/Kernel
 # but currently:
 # $ git clone git://git.directfb.org/git/directfb/core/DirectFB.git DirectFB.git
 # $ tar cf linux-one.tar -C DirectFB.git/lib/One linux-one
-Source0:	%{name}.tar.xz
+Source0:	%{pname}.tar.xz
 # Source0-md5:	d794442fccb99b82c9c3d0b2d5609aaa
 Source1:	OneTypes.h
 URL:		http://www.directfb.org/
@@ -61,29 +62,30 @@ Plik nagłówkowy dla urządzenia IPC One.
 
 Linux One to nowe API IPC wykorzystywane przez Comę.
 
-%package -n kernel-one
+%package -n kernel-misc-one
 Summary:	One IPC module for Linux kernel
 Summary(pl.UTF-8):	Moduł IPC One dla jądra Linuksa
 Release:	%{rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 Requires(post,postun):	/sbin/depmod
 %if %{with dist_kernel}
-%requires_releq_kernel_up
-Requires(postun):	%releq_kernel_up
+%requires_releq_kernel
+Requires(postun):	%releq_kernel
 %endif
+Obsoletes:	kernel-one
 
-%description -n kernel-one
+%description -n kernel-misc-one
 One IPC module for Linux kernel.
 
 Linux One is the new IPC API used by Coma.
 
-%description -n kernel-one -l pl.UTF-8
+%description -n kernel-misc-one -l pl.UTF-8
 Moduł IPC One dla jądra Linuksa.
 
 Linux One to nowe API IPC wykorzystywane przez Comę.
 
 %prep
-%setup -q -n %{name}
+%setup -q -n %{pname}
 
 sed -i -e 's/^obj-[^ ]*/obj-m/' src/Makefile-2.6
 echo "EXTRA_CFLAGS = -I`pwd`/include -I`pwd`/src/single" >> src/Makefile-2.6
@@ -108,16 +110,16 @@ install include/linux/one.h $RPM_BUILD_ROOT%{_includedir}/linux
 
 %if %{with kernel}
 cd src
-%install_kernel_modules -m linux-one -d kernel
+%install_kernel_modules -m linux-one -d misc
 %endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-n kernel-one
+%post	-n kernel-misc-one
 %depmod %{_kernel_ver}
 
-%postun	-n kernel-one
+%postun	-n kernel-misc-one
 %depmod %{_kernel_ver}
 
 %if %{with userspace}
@@ -128,7 +130,7 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %if %{with kernel}
-%files -n kernel-one
+%files -n kernel-misc-one
 %defattr(644,root,root,755)
-/lib/modules/%{_kernel_ver}/kernel/linux-one.ko*
+/lib/modules/%{_kernel_ver}/misc/linux-one.ko*
 %endif
