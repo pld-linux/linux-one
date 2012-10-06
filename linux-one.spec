@@ -13,7 +13,7 @@ Summary:	One IPC Linux kernel module
 Summary(pl.UTF-8):	Moduł IPC One dla jądra Linuksa
 Name:		linux-one
 Version:	1.6.0
-%define		rel	1
+%define		rel	2
 Release:	%{rel}
 License:	GPL v2+
 Group:		Base/Kernel
