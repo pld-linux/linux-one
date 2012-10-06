@@ -9,7 +9,7 @@
 %undefine	with_dist_kernel
 %endif
 
-%define		rel	4
+%define		rel	5
 %define		pname	linux-one
 Summary:	One IPC Linux kernel module
 Summary(pl.UTF-8):	Moduł IPC One dla jądra Linuksa
@@ -116,10 +116,10 @@ cd src
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-n kernel-misc-one
+%post	-n kernel%{_alt_kernel}-misc-one
 %depmod %{_kernel_ver}
 
-%postun	-n kernel-misc-one
+%postun	-n kernel%{_alt_kernel}-misc-one
 %depmod %{_kernel_ver}
 
 %if %{with userspace}
