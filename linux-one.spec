@@ -9,7 +9,7 @@
 %undefine	with_dist_kernel
 %endif
 
-%define		rel	3
+%define		rel	4
 %define		pname	linux-one
 Summary:	One IPC Linux kernel module
 Summary(pl.UTF-8):	Moduł IPC One dla jądra Linuksa
@@ -62,7 +62,7 @@ Plik nagłówkowy dla urządzenia IPC One.
 
 Linux One to nowe API IPC wykorzystywane przez Comę.
 
-%package -n kernel-misc-one
+%package -n kernel%{_alt_kernel}-misc-one
 Summary:	One IPC module for Linux kernel
 Summary(pl.UTF-8):	Moduł IPC One dla jądra Linuksa
 Release:	%{rel}@%{_kernel_ver_str}
@@ -74,12 +74,12 @@ Requires(postun):	%releq_kernel
 %endif
 Obsoletes:	kernel-one
 
-%description -n kernel-misc-one
+%description -n kernel%{_alt_kernel}-misc-one
 One IPC module for Linux kernel.
 
 Linux One is the new IPC API used by Coma.
 
-%description -n kernel-misc-one -l pl.UTF-8
+%description -n kernel%{_alt_kernel}-misc-one -l pl.UTF-8
 Moduł IPC One dla jądra Linuksa.
 
 Linux One to nowe API IPC wykorzystywane przez Comę.
@@ -130,7 +130,7 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %if %{with kernel}
-%files -n kernel-misc-one
+%files -n kernel%{_alt_kernel}-misc-one
 %defattr(644,root,root,755)
 /lib/modules/%{_kernel_ver}/misc/linux-one.ko*
 %endif
