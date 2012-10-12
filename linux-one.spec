@@ -9,7 +9,7 @@
 %undefine	with_dist_kernel
 %endif
 
-%define		rel	6
+%define		rel	7
 %define		pname	linux-one
 Summary:	One IPC Linux kernel module
 Summary(pl.UTF-8):	Moduł IPC One dla jądra Linuksa
