@@ -1,3 +1,4 @@
+# NOTE: currently obsolete, One is built from linux-fusion package
 #
 # Conditional build:
 %bcond_without	dist_kernel	# allow non-distribution kernel
@@ -9,7 +10,7 @@
 %undefine	with_dist_kernel
 %endif
 
-%define		rel	18
+%define		rel	18.1
 %define		pname	linux-one
 Summary:	One IPC Linux kernel module
 Summary(pl.UTF-8):	Moduł IPC One dla jądra Linuksa
